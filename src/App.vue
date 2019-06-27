@@ -1,23 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <button v-on:click="requestTestToExpress">Express 요청 테스트</button>
+    <button v-on:click="requestTestToExpress">Express 요청 테스트</button><br>
+    <pre>{{ content }}</pre>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
+  data() {
+      return {
+          content: 'Result:\n'
+      }
+  },
   components: {
-    HelloWorld
   },
   methods: {
     requestTestToExpress: async function () {
       const res = await this.$http.get('/');
-      console.log(res.data);
+      this.content += '\n' + res.data;
     }
   }
 }
